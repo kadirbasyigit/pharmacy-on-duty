@@ -1,41 +1,59 @@
-import { Select, SelectItem } from '@nextui-org/select';
-import { Button } from '@nextui-org/button';
+import { Select, Button } from '@mantine/core';
+import { provinceData } from '../provinceData';
+import { useState } from 'react';
+
+type Province = {
+  province: string;
+  districts: string[];
+};
 
 export default function ProvinceDistrictSelect() {
+  const [selectedProvince, setSelectedProvince] = useState<string | null>(null);
+  const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null);
+  const [districts, setDistricts] = useState<string[]>([]);
+
+  const handleProvinceChange = (value: string | null) => {
+    setSelectedProvince(value);
+    if (value) {
+      const selectedData = provinceData.find(
+        (p: Province) => p.province === value
+      );
+      setDistricts(selectedData ? selectedData.districts : []);
+    } else {
+      setDistricts([]);
+    }
+  };
+
+  const handleDistrictChange = (value: string | null) => {
+    setSelectedDistrict(value);
+  };
+
+  const getLocation = () => {
+    console.log(selectedProvince);
+    console.log(selectedDistrict);
+  };
+
   return (
-    <div className="w-11/12 shadow-md rounded-md mx-auto p-10 mt-10 bg-slate-200">
-      <h3 className="text-2xl font-bold pb-10">Nöbetçi Eczane Bul</h3>
-      <div className="flex gap-14">
+    <div className="w-2/3 mx-auto p-10 bg-blue-300 mt-10">
+      <h3 className="font-bold text-2xl mb-6">Eczane Bul</h3>
+      <div className="flex gap-16">
         <Select
-          isRequired
-          label="Şehir"
-          placeholder="Şehir seçiniz"
-          defaultSelectedKeys={['cat']}
-          className="max-w-xs"
-        >
-          {/* {animals.map((animal) => (
-        <SelectItem key={animal.key}>
-          {animal.label}
-        </SelectItem>
-      ))} */}
-        </Select>
-
+          className="w-64"
+          label="Şehir Seçin"
+          placeholder="Bir şehir seçin"
+          data={provinceData.map((location: Province) => location.province)}
+          onChange={handleProvinceChange}
+        />
         <Select
-          isRequired
-          label="İlçe"
-          placeholder="İlçe seçiniz"
-          defaultSelectedKeys={['cat']}
-          className="max-w-xs"
-        >
-          {/* {animals.map((animal) => (
-        <SelectItem key={animal.key}>
-          {animal.label}
-        </SelectItem>
-      ))} */}
-        </Select>
-
-        <Button className="w-40 h-14" color="primary">
-          Eczane ara
+          className="w-64"
+          label="İlçe Seçin"
+          placeholder="Bir ilçe seçin"
+          data={districts}
+          disabled={!selectedProvince}
+          onChange={handleDistrictChange}
+        />
+        <Button className="self-end" onClick={getLocation}>
+          Eczane Ara
         </Button>
       </div>
     </div>
