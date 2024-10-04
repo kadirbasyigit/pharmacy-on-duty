@@ -4,7 +4,7 @@ export default {
   content: [
     './index.html',
     './src/**/*.{js,ts,jsx,tsx}',
-    './node_modules/@nextui-org/theme/dist/components/(button|snippet|code|input).js',
+    './node_modules/@nextui-org/theme/dist/components/(button|select).js',
   ],
   theme: {
     extend: {},

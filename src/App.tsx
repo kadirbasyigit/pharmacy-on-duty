@@ -1,7 +1,11 @@
+import ProvinceDistrictSelect from './components/ProvinceDistrictSelect';
+import Header from './components/layout/Header';
+
 function App() {
   return (
     <div>
-      <p>pharmacy on duty app</p>
+      <Header />
+      <ProvinceDistrictSelect />
     </div>
   );
 }
