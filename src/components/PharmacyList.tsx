@@ -2,6 +2,7 @@ import { usePharmaciesOnDuty } from '../hooks/usePharmaciesOnDuty.ts';
 import { Loader } from '@mantine/core';
 import { FaLocationDot } from 'react-icons/fa6';
 import { FaSquarePhone } from 'react-icons/fa6';
+import { Button } from '@mantine/core';
 
 type PharmacyListProps = {
   province: string;
@@ -10,6 +11,12 @@ type PharmacyListProps = {
 
 const PharmacyList = ({ province, district }: PharmacyListProps) => {
   const { data, error, isLoading } = usePharmaciesOnDuty(province, district);
+
+  function handleClick(address: string) {
+    const encodedAddress = encodeURIComponent(address);
+    const url = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
+    window.open(url, '_blank');
+  }
 
   if (!province || !district) {
     return null;
@@ -56,6 +63,8 @@ const PharmacyList = ({ province, district }: PharmacyListProps) => {
           minute: '2-digit',
         });
 
+        const address = pharmacy.address;
+
         return (
           <li
             key={pharmacy.pharmacyName}
@@ -63,10 +72,10 @@ const PharmacyList = ({ province, district }: PharmacyListProps) => {
           >
             <h4 className="text-xl font-bold">{pharmacy.pharmacyName}</h4>
             <div className="pharmacy-data-body-text">
-              <FaLocationDot className="text-2xl" /> <p>{pharmacy.address}</p>
+              <FaLocationDot size={24} /> <p>{pharmacy.address}</p>
             </div>
             <div className="pharmacy-data-body-text">
-              <FaSquarePhone className="text-2xl" />
+              <FaSquarePhone size={24} />
               <p>{pharmacy.phone}</p>
             </div>
 
@@ -79,6 +88,20 @@ const PharmacyList = ({ province, district }: PharmacyListProps) => {
               Nöbet bitiş tarihi ve saati: {dutyEndDateString} -{' '}
               {dutyEndTimeString}
             </p>
+            <Button
+              onClick={() => handleClick(address)}
+              variant="gradient"
+              gradient={{ from: 'rgba(2, 2, 92, 1)', to: 'blue', deg: 94 }}
+              leftSection={
+                <img
+                  src="/images/google-maps.png"
+                  alt="google maps image"
+                  width="24px"
+                />
+              }
+            >
+              Haritalarda Göster
+            </Button>
           </li>
         );
       })}
