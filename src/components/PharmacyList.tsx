@@ -38,13 +38,18 @@ const PharmacyList = ({ province, district }: PharmacyListProps) => {
   return (
     <ul className="w-2/3 mx-auto p-10 mt-10 text-neutral-200 grid grid-cols-2 gap-14">
       {data?.map(pharmacy => {
-        const dutyStartDate = new Date(pharmacy.pharmacyDutyStart);
+        const startDate = pharmacy.pharmacyDutyStart;
+        const isoStringFormattedStartDate = startDate.replace(' ', 'T');
+        const dutyStartDate = new Date(isoStringFormattedStartDate);
         const dutyStartDateString = dutyStartDate.toLocaleDateString();
         const dutyStartTimeString = dutyStartDate.toLocaleTimeString([], {
           hour: '2-digit',
           minute: '2-digit',
         });
-        const dutyEndDate = new Date(pharmacy.pharmacyDutyEnd);
+
+        const endDate = pharmacy.pharmacyDutyEnd;
+        const isoStringFormattedEndDate = endDate.replace(' ', 'T');
+        const dutyEndDate = new Date(isoStringFormattedEndDate);
         const dutyEndDateString = dutyEndDate.toLocaleDateString();
         const dutyEndTimeString = dutyEndDate.toLocaleTimeString([], {
           hour: '2-digit',
