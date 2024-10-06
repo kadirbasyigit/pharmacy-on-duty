@@ -1,11 +1,14 @@
 export interface Pharmacy {
-  name: string;
-  dist: string;
+  pharmacyName: string;
   address: string;
   phone: string;
-  loc: string;
+  latitude: number;
+  longitude: number;
+  pharmacyDutyStart: string;
+  pharmacyDutyEnd: string;
 }
 export interface PharmacyResponse {
-  success: boolean;
-  result: Pharmacy[];
+  status: string;
+  messageTR: string;
+  data: Pharmacy[];
 }

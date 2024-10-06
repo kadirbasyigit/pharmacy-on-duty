@@ -47,7 +47,7 @@ export default function ProvinceDistrictSelect({
   };
 
   return (
-    <div className="w-2/3 mx-auto p-10 bg-blue-300 mt-10">
+    <div className="w-2/3 mx-auto p-10 bg-blue-200 mt-10 rounded-md shadow-lg">
       <h3 className="font-bold text-2xl mb-6">Eczane Bul</h3>
       <div className="flex gap-16">
         <Select

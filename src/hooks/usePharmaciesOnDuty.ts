@@ -9,24 +9,26 @@ const fetchPharmacies = async (
   district: string
 ): Promise<Pharmacy[]> => {
   const response = await axios.get<PharmacyResponse>(
-    `https://api.collectapi.com/health/dutyPharmacy?ilce=${district}&il=${province}`,
+    `https://www.nosyapi.com/apiv2/service/pharmacies-on-duty?city=${province}&district=${district}`,
     {
-      headers: {
-        Authorization: `${apiKey}`,
+      params: {
+        apiKey: `${apiKey}`,
       },
     }
   );
 
-  if (!response.data.success) {
-    throw new Error('Api request failed');
+  if (response.data.status === 'failure') {
+    throw new Error(response.data.messageTR);
   }
 
-  return response.data.result;
+  return response.data.data;
 };
 
 export function usePharmaciesOnDuty(province: string, district: string) {
   return useQuery<Pharmacy[], Error>({
     queryKey: ['pharmaciesOnDuty', province, district],
     queryFn: () => fetchPharmacies(province, district),
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
   });
 }
