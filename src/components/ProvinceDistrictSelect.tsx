@@ -7,7 +7,15 @@ type Province = {
   districts: string[];
 };
 
-export default function ProvinceDistrictSelect() {
+type ProvinceDistrictSelectProps = {
+  setProvince: (province: string) => void;
+  setDistrict: (district: string) => void;
+};
+
+export default function ProvinceDistrictSelect({
+  setProvince,
+  setDistrict,
+}: ProvinceDistrictSelectProps) {
   const [selectedProvince, setSelectedProvince] = useState<string | null>(null);
   const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null);
   const [districts, setDistricts] = useState<string[]>([]);
@@ -29,8 +37,13 @@ export default function ProvinceDistrictSelect() {
   };
 
   const getLocation = () => {
-    console.log(selectedProvince);
-    console.log(selectedDistrict);
+    if (selectedProvince) {
+      setProvince(selectedProvince);
+    }
+
+    if (selectedDistrict) {
+      setDistrict(selectedDistrict);
+    }
   };
 
   return (
