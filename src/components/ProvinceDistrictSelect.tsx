@@ -22,6 +22,7 @@ export default function ProvinceDistrictSelect({
 
   const handleProvinceChange = (value: string | null) => {
     setSelectedProvince(value);
+    setSelectedDistrict(null);
     if (value) {
       const selectedData = provinceData.find(
         (p: Province) => p.province === value
@@ -64,6 +65,7 @@ export default function ProvinceDistrictSelect({
           data={districts}
           disabled={!selectedProvince}
           onChange={handleDistrictChange}
+          value={selectedDistrict}
         />
         <Button className="self-end" onClick={getLocation}>
           Eczane Ara
