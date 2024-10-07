@@ -43,7 +43,7 @@ const PharmacyList = ({ province, district }: PharmacyListProps) => {
     );
 
   return (
-    <ul className="w-2/3 mx-auto p-10 mt-10 text-neutral-200 grid grid-cols-2 gap-14">
+    <ul className="w-11/12 md:w-2/4 xl:w-2/3 mx-auto p-0 xl:p-10 mt-10 text-neutral-200 grid xl:grid-cols-2 gap-5 xl:gap-14">
       {data?.map(pharmacy => {
         const startDate = pharmacy.pharmacyDutyStart;
         const isoStringFormattedStartDate = startDate.replace(' ', 'T');
