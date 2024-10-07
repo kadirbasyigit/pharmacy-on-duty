@@ -17,7 +17,9 @@ function App() {
           setProvince={setProvince}
           setDistrict={setDistrict}
         />
-        <PharmacyList province={province} district={district} />
+        {province && district && (
+          <PharmacyList province={province} district={district} />
+        )}
       </>
     </MantineProvider>
   );
