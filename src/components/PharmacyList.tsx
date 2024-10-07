@@ -92,6 +92,9 @@ const PharmacyList = ({ province, district }: PharmacyListProps) => {
               onClick={() => handleClick(address)}
               variant="gradient"
               gradient={{ from: 'rgba(2, 2, 92, 1)', to: 'blue', deg: 94 }}
+              styles={{
+                root: { height: '42px' },
+              }}
               leftSection={
                 <img
                   src="/images/google-maps.png"
