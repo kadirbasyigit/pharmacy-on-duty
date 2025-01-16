@@ -45,24 +45,6 @@ const PharmacyList = ({ province, district }: PharmacyListProps) => {
   return (
     <ul className="w-11/12 md:w-2/4 xl:w-2/3 mx-auto p-0 xl:p-10 mt-10 text-neutral-200 grid xl:grid-cols-2 gap-5 xl:gap-14">
       {data?.map(pharmacy => {
-        const startDate = pharmacy.pharmacyDutyStart;
-        const isoStringFormattedStartDate = startDate.replace(' ', 'T');
-        const dutyStartDate = new Date(isoStringFormattedStartDate);
-        const dutyStartDateString = dutyStartDate.toLocaleDateString();
-        const dutyStartTimeString = dutyStartDate.toLocaleTimeString([], {
-          hour: '2-digit',
-          minute: '2-digit',
-        });
-
-        const endDate = pharmacy.pharmacyDutyEnd;
-        const isoStringFormattedEndDate = endDate.replace(' ', 'T');
-        const dutyEndDate = new Date(isoStringFormattedEndDate);
-        const dutyEndDateString = dutyEndDate.toLocaleDateString();
-        const dutyEndTimeString = dutyEndDate.toLocaleTimeString([], {
-          hour: '2-digit',
-          minute: '2-digit',
-        });
-
         const address = pharmacy.address;
 
         return (
@@ -79,15 +61,6 @@ const PharmacyList = ({ province, district }: PharmacyListProps) => {
               <p>{pharmacy.phone}</p>
             </div>
 
-            <p className="text-sm">
-              Nöbet başlangıç tarihi ve saati: {dutyStartDateString} -{' '}
-              {dutyStartTimeString}
-            </p>
-
-            <p className="text-sm">
-              Nöbet bitiş tarihi ve saati: {dutyEndDateString} -{' '}
-              {dutyEndTimeString}
-            </p>
             <Button
               onClick={() => handleClick(address)}
               variant="gradient"
